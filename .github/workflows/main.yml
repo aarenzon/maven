@@ -18,10 +18,10 @@ jobs:
           architecture: x64
           cache: maven
       - run: mvn -B package --file pom.xml
-      - run: ls -arlt target && mkdir staging && cp target/*.jar staging
+      - run: mkdir staging && cp target/*.jar staging && ls -arlt staging
       - uses: actions/upload-artifact@v3
         with:
-          name: my-artifact
+#          name: my-artifact
           path: staging/
           if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
           retention-days: 5
