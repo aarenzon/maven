@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="abb-system-api-test-suite-success.xml" />
+	<munit:test name="abb-system-api-test-suite-api-implementation-successFlowTest" description="Test" doc:id="1195d4da-d93b-4bde-857a-47f79e4899a8" >
+		<munit:behavior>
+			<munit-tools:mock-when doc:name="Mock when Call ABB" doc:id="968918fe-e6ff-41ef-ae4f-fa10037cd6c5" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute attributeName="doc:id" whereValue="#['28e45cc8-8161-4195-b085-f43b87189e5f']" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value='#[MunitTools::getResourceAsString("sample/success-response.json")]' mediaType="application/json" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="1a39492c-9a2c-45ff-a89a-f374be253ab6" >
+				<munit:payload value='{"WFMGetAppointments":{"WFMGetAppointmentsRequest":{"scope":"Cable","TransactionId":"","Context":{"Channel":"WS","ClientSystem":"TPIAPORTAL","InvocationMethod":"WFMGetAppointments","InvocationState":"U"},"WFMGetAppointmentInfo":{"CallID":"C231408875800","OrderType":"RECN","NumberOfRequiredEngineers":"1","CBU":"SWO","Region":"SWO-SERV-INST","District":"CAMBRIDGE","MapArea":"630","SourcePriority":"06","WorkType":"TOPP","Duration":"2340","City":"CAMBRIDGE","State":"Ontario","PostalCode":"N1R5G5","SourceLatitude":"43.350552","SourceLongitude":"-80.294198","StartDate":"2018-11-22","RequiredSkills":{"TaskRequiredSkill":{"Key":"TPIA"}}}}}}' mediaType="application/json" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to api-implementationFlow" doc:id="2ba81916-42a0-4f75-adce-0b4121c51dcc" name="api-implementationFlow"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="e0fa731d-353d-4438-adbb-9e74fa9c7c49" expression="#[payload.WFMGetAppointmentsResponse.CallID]" is="#[MunitTools::equalTo('C231408875800')]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="abb-system-api-test-suite-api-implementation-errorFlowTest" description="Test" doc:id="7a55dc72-9a97-4542-897b-d901b553299a" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when Call ABB" doc:id="4abfe04d-2d0f-465b-bd48-0eaeb418e751" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute attributeName="doc:id" whereValue="#['28e45cc8-8161-4195-b085-f43b87189e5f']" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value='#[MunitTools::getResourceAsString("sample/error-response.json")]' mediaType="application/json"/>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="e4cb7490-5be2-4218-a71a-55c9be18d40f" >
+				<munit:payload value='{"WFMGetAppointments":{"WFMGetAppointmentsRequest":{"scope":"Cable","TransactionId":"","Context":{"Channel":"WS","ClientSystem":"TPIAPORTAL","InvocationMethod":"WFMGetAppointments","InvocationState":"U"},"WFMGetAppointmentInfo":{"CallID":"C231408875800","OrderType":"RECN","NumberOfRequiredEngineers":"1","CBU":"SWO","Region":"SWO-SERV-INST","District":"CAMBRIDGE","MapArea":"630","SourcePriority":"06","WorkType":"TOPP","Duration":"2340","City":"CAMBRIDGE","State":"Ontario","PostalCode":"N1R5G5","SourceLatitude":"43.350552","SourceLongitude":"-80.294198","StartDate":"2018-11-22","RequiredSkills":{"TaskRequiredSkill":{"Key":"TPIA"}}}}}}' mediaType="application/json" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to api-implementationFlow" doc:id="2ab458c1-8179-4aa9-8c38-3c50b8ea2894" name="api-implementationFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="d8f7be20-fb32-44d2-bd1d-307036824bd4" expression="#[payload.WFMGetAppointmentsResponse.CallID]" is="#[MunitTools::nullValue()]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

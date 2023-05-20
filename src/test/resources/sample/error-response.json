@@ -1,0 +1,30 @@
+{
+   "Envelope":{
+      "Body":{
+         "transactionId":"0-5423e9b0-3f64-11e9-8c88-001dd8b74be8",
+         "serviceName":"abb-system-api",
+         "clientRefId":"DEMo",
+         "WFMGetAppointmentsResponse":{
+            "WFMGetAppointmentsResponse":{
+               "ReturnCode":null,
+               "ReportingID":null,
+               "CallID":null,
+               "ProfileCode":"P09",
+               "NumberOfSearchDays":"4",
+               "NumberOfProfileSlots":"6",
+               "TimeInterval":[
+                  {
+                     "SlotCode":"8A",
+                     "SlotDescription":"8:00A -10:00A",
+                     "Start":"2018-11-22T08:00:00.000-05:00",
+                     "Finish":"2018-11-22T09:45:00.000-05:00",
+                     "StartTime":"2018-11-22T08:00:00Z",
+                     "FinishTime":"2018-11-22T08:00:00Z",
+                     "IsAppointmentAvailable":"false"
+                  }
+               ]
+            }
+         }
+      }
+   }
+}

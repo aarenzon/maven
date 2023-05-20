@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<mule xmlns:wsc="http://www.mulesoft.org/schema/mule/wsc" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit-soap="http://www.mulesoft.org/schema/mule/apikit-soap" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/apikit-soap http://www.mulesoft.org/schema/mule/apikit-soap/current/mule-apikit-soap.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/current/mule-wsc.xsd">
+	<flow name="api-implementationFlow">
+		<ee:transform doc:name="Transform Message Request" doc:id="648303e3-61c2-45fe-9415-d97cd5e1ee3d" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+  "S:Envelope": {
+    "xmlns:S": "http://schemas.xmlsoap.org/soap/envelope/",
+    "xmlns:env": "http://schemas.xmlsoap.org/soap/envelope/",
+    "S:Body": {
+      "ns0:WFMGetAppointments": {
+        "xmlns:ns2": "http://rci.rogers.com/schemas/Contact",
+        "xmlns:ns1": "http://rci.rogers.com/schemas/CallCentre",
+        "xmlns:ns3": "http://rci.rogers.com/schemas/Context",
+        "xmlns:ns0": "http://www.openuri.org/",
+        "xmlns:ns9": "http://rci.rogers.com/schemas/WFMReserveAppointment",
+        "xmlns:ns5": "http://rci.rogers.com/schemas/WFMCommon",
+        "xmlns:ns6": "http://rci.rogers.com/schemas/WFMConfirmAppointment",
+        "xmlns:ns7": "http://rci.rogers.com/schemas/WFMGetAppointments",
+        "xmlns:ns10": "http://rci.rogers.com/schemas/Scope",
+        "xmlns:ns8": "http://rci.rogers.com/schemas/WFMReleaseAppointment",
+        "ns7:WFMGetAppointmentsRequest": {
+          "ns10:scope": payload.WFMGetAppointments.WFMGetAppointmentsRequest.scope,
+          "TransactionId": payload.WFMGetAppointments.WFMGetAppointmentsRequest.TransactionId,
+          "ns7:Context": {
+            "ns3:Channel": payload.WFMGetAppointments.WFMGetAppointmentsRequest.Context.Channel,
+            "ns3:ClientSystem": payload.WFMGetAppointments.WFMGetAppointmentsRequest.Context.ClientSystem,
+            "ns3:InvocationMethod": payload.WFMGetAppointments.WFMGetAppointmentsRequest.Context.InvocationMethod,
+            "ns3:InvocationState": payload.WFMGetAppointments.WFMGetAppointmentsRequest.Context.InvocationState
+          },
+          "ns7:WFMGetAppointmentInfo": {
+            "ns7:CallID": payload.WFMGetAppointments.WFMGetAppointmentsRequest.WFMGetAppointmentInfo.CallID,
+            "ns7:OrderType": payload.WFMGetAppointments.WFMGetAppointmentsRequest.WFMGetAppointmentInfo.OrderType,
+            "ns7:NumberOfRequiredEngineers": payload.WFMGetAppointments.WFMGetAppointmentsRequest.WFMGetAppointmentInfo.NumberOfRequiredEngineers,
+            "ns7:CBU": payload.WFMGetAppointments.WFMGetAppointmentsRequest.WFMGetAppointmentInfo.CBU,
+            "ns7:Region": payload.WFMGetAppointments.WFMGetAppointmentsRequest.WFMGetAppointmentInfo.Region,
+            "ns7:District": payload.WFMGetAppointments.WFMGetAppointmentsRequest.WFMGetAppointmentInfo.District,
+            "ns7:MapArea": payload.WFMGetAppointments.WFMGetAppointmentsRequest.WFMGetAppointmentInfo.MapArea,
+            "ns7:SourcePriority": payload.WFMGetAppointments.WFMGetAppointmentsRequest.WFMGetAppointmentInfo.SourcePriority,
+            "ns7:WorkType": payload.WFMGetAppointments.WFMGetAppointmentsRequest.WFMGetAppointmentInfo.WorkType,
+            "ns7:Duration": payload.WFMGetAppointments.WFMGetAppointmentsRequest.WFMGetAppointmentInfo.Duration,
+            "ns7:City": payload.WFMGetAppointments.WFMGetAppointmentsRequest.WFMGetAppointmentInfo.City,
+            "ns7:State": payload.WFMGetAppointments.WFMGetAppointmentsRequest.WFMGetAppointmentInfo.State,
+            "ns7:PostalCode": payload.WFMGetAppointments.WFMGetAppointmentsRequest.WFMGetAppointmentInfo.PostalCode,
+            "ns7:SourceLatitude": payload.WFMGetAppointments.WFMGetAppointmentsRequest.WFMGetAppointmentInfo.SourceLatitude,
+            "ns7:SourceLongitude": payload.WFMGetAppointments.WFMGetAppointmentsRequest.WFMGetAppointmentInfo.SourceLongitude,
+            "ns7:StartDate": payload.WFMGetAppointments.WFMGetAppointmentsRequest.WFMGetAppointmentInfo.StartDate,
+            "ns7:RequiredSkills": {
+              "ns7:TaskRequiredSkill": { "ns7:Key": payload.WFMGetAppointments.WFMGetAppointmentsRequest.WFMGetAppointmentInfo.RequiredSkills.TaskRequiredSkill.Key }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<ee:transform doc:name="Transform Message JSON to XML" doc:id="760f09fc-c44c-4cde-8847-ec7a9aea7c48" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output text/xml
+ns ns0 http://schemas.xmlsoap.org/soap/envelope/
+ns ns01 http://www.openuri.org/
+ns ns02 http://rci.rogers.com/schemas/WFMGetAppointments
+ns ns03 http://rci.rogers.com/schemas/Context
+---
+{
+	ns0#Envelope: {
+		ns0#Header: (payload."S:Envelope"."xmlns:S"
+default "") ++ " " ++ payload."S:Envelope"."xmlns:env",
+		ns0#Body: {
+			ns01#WFMGetAppointments: {
+				ns02#WFMGetAppointmentsRequest @(scope: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns10:scope" , TransactionId: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest".TransactionId): {
+					ns02#Context: {
+						ns03#Channel: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:Context"."ns3:Channel",
+						ns03#ClientSystem: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:Context"."ns3:ClientSystem",
+						ns03#InvocationMethod: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:Context"."ns3:InvocationMethod",
+						ns03#InvocationState: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:Context"."ns3:InvocationState"
+					},
+					ns02#WFMGetAppointmentInfo: {
+						ns02#CallID: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:WFMGetAppointmentInfo"."ns7:CallID",
+						ns02#OrderType: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:WFMGetAppointmentInfo"."ns7:OrderType",
+						ns02#NumberOfRequiredEngineers: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:WFMGetAppointmentInfo"."ns7:NumberOfRequiredEngineers",
+						ns02#CBU: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:WFMGetAppointmentInfo"."ns7:CBU",
+						ns02#Region: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:WFMGetAppointmentInfo"."ns7:Region",
+						ns02#District: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:WFMGetAppointmentInfo"."ns7:District",
+						ns02#MapArea: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:WFMGetAppointmentInfo"."ns7:MapArea",
+						ns02#SourcePriority: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:WFMGetAppointmentInfo"."ns7:SourcePriority",
+						ns02#WorkType: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:WFMGetAppointmentInfo"."ns7:WorkType",
+						ns02#Duration: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:WFMGetAppointmentInfo"."ns7:Duration" ,
+						ns02#City: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:WFMGetAppointmentInfo"."ns7:City",
+						ns02#State: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:WFMGetAppointmentInfo"."ns7:State",
+						ns02#PostalCode: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:WFMGetAppointmentInfo"."ns7:PostalCode",
+						ns02#SourceLatitude: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:WFMGetAppointmentInfo"."ns7:SourceLatitude" ,
+						ns02#SourceLongitude: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:WFMGetAppointmentInfo"."ns7:SourceLongitude",
+						ns02#StartDate: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:WFMGetAppointmentInfo"."ns7:StartDate",
+						ns02#RequiredSkills: {
+							ns02#TaskRequiredSkill: {
+								ns02#Key: payload."S:Envelope"."S:Body"."ns0:WFMGetAppointments"."ns7:WFMGetAppointmentsRequest"."ns7:WFMGetAppointmentInfo"."ns7:RequiredSkills"."ns7:TaskRequiredSkill"."ns7:Key"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Log Transformed XML Request" doc:id="ba2d6029-54ea-4c10-aa4c-80eda06dc1d9" message="===================AFTER TRANSFORMATION=================#[payload]"/>
+		<http:request method="POST" doc:name="Call ABB" doc:id="28e45cc8-8161-4195-b085-f43b87189e5f" config-ref="HTTP_Request_configuration_ABB" path="${ABB.path}">
+			<http:response-validator >
+				<http:success-status-code-validator values="0..500"/>
+			</http:response-validator>
+		</http:request>
+		<ee:transform doc:name="Transform Message XML to JSON" doc:id="700b4269-c86b-4324-9154-32536829b9c5" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Log Transformed JSON Response" doc:id="99c98eee-d873-4e41-ae0b-5196fdff612b" message="========================Response in JSON #[payload]======================="/>
+		<choice doc:name="Check Success or Error Response" doc:id="bbc175bf-7a8c-44f9-9cb5-ba119105b821" >
+			<when expression="#[payload.Envelope.Body.WFMGetAppointmentsResponse.WFMGetAppointmentsResponse.CallID != null]">
+				<ee:transform doc:name="Transform Message Success Response" doc:id="8a43f0a8-a2fe-47e7-a5f6-dedc6298c4f3">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"transactionId": vars.transactionId,
+	"serviceName": vars.apiname,
+	"clientRef": vars.clientRef,
+	dateTime : (now() >> "America/Toronto") as String { format: "yyyy-MM-dd'T'HH:mm:ssXXX" },
+	"WFMGetAppointmentsResponse": {
+		"ReturnCode": payload.Envelope.Body.WFMGetAppointmentsResponse.WFMGetAppointmentsResponse.ReturnCode,
+		"ReportingID": payload.Envelope.Body.WFMGetAppointmentsResponse.WFMGetAppointmentsResponse.ReportingID,
+		"CallID": payload.Envelope.Body.WFMGetAppointmentsResponse.WFMGetAppointmentsResponse.CallID,
+		"ProfileCode": payload.Envelope.Body.WFMGetAppointmentsResponse.WFMGetAppointmentsResponse.ProfileCode,
+		"NumberOfSearchDays": payload.Envelope.Body.WFMGetAppointmentsResponse.WFMGetAppointmentsResponse.NumberOfSearchDays,
+		"NumberOfProfileSlots": payload.Envelope.Body.WFMGetAppointmentsResponse.WFMGetAppointmentsResponse.NumberOfProfileSlots,
+		TimeInterval: payload.Envelope.Body.WFMGetAppointmentsResponse.WFMGetAppointmentsResponse.OptionalAppointments.*TimeInterval map (item, index) -> {
+			"SlotCode": item.SlotCode,
+			"SlotDescription": item.SlotDescription,
+			"Start": item.Start,
+			"Finish": item.Finish,
+			"StartTime": item.StartTime,
+			"FinishTime": item.StartTime,
+			"IsAppointmentAvailable": item.IsAppointmentAvailable
+		}
+	}
+}
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+			</when>
+			<otherwise >
+				<ee:transform doc:name="Transform Message Error Response" doc:id="fe10c036-4479-4144-bf76-66aa14c4d162" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"transactionId": vars.transactionId,
+	"serviceName": vars.apiname,
+	"clientRef": vars.clientRef,
+	dateTime : (now() >> "America/Toronto") as String { format: "yyyy-MM-dd'T'HH:mm:ssXXX" },
+	"error": {
+            "faultcode": payload.Envelope.Body.Fault.faultcode,
+            "faultstring": payload.Envelope.Body.Fault.faultstring,
+            "detail": payload.Envelope.Body.Fault.detail
+            }
+          }]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</otherwise>
+		</choice>
+    </flow>
+</mule>

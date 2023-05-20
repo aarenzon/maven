@@ -1,0 +1,47 @@
+{
+  "Envelope": {
+    "Header": null,
+    "Body": {
+      "WFMGetAppointmentsResponse": {
+        "WFMGetAppointmentsResponse": {
+          "ReturnCode": null,
+          "ReportingID": null,
+          "CallID": "C231408875800",
+          "ProfileCode": "P09",
+          "NumberOfSearchDays": "4",
+          "NumberOfProfileSlots": "6",
+          "OptionalAppointments": [
+            {"TimeInterval": {
+              "SlotCode": "8A",
+              "SlotDescription": "8:00A -10:00A",
+              "Start": "2018-11-22T08:00:00.000-05:00",
+              "Finish": "2018-11-22T09:45:00.000-05:00",
+              "StartTime": "2018-11-22T08:00:00Z",
+              "FinishTime": "2018-11-22T09:45:00Z",
+              "IsAppointmentAvailable": "false"
+            }},
+            {"TimeInterval": {
+              "SlotCode": "10A",
+              "SlotDescription": "10:00A-12:00P",
+              "Start": "2018-11-22T10:00:00.000-05:00",
+              "Finish": "2018-11-22T11:45:00.000-05:00",
+              "StartTime": "2018-11-22T10:00:00Z",
+              "FinishTime": "2018-11-22T11:45:00Z",
+              "IsAppointmentAvailable": "false"
+            }},
+            {"TimeInterval": {
+              "SlotCode": "12P",
+              "SlotDescription": "12:00P -2:00P",
+              "Start": "2018-11-22T12:00:00.000-05:00",
+              "Finish": "2018-11-22T13:45:00.000-05:00",
+              "StartTime": "2018-11-22T12:00:00Z",
+              "FinishTime": "2018-11-22T13:45:00Z",
+              "IsAppointmentAvailable": "false"
+            }
+			}
+          ]
+        }
+      }
+    }
+  }
+}

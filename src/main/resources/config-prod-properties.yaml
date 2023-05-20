@@ -1,0 +1,35 @@
+application:
+ name: "abb-sys-api"
+api:
+ name: "abb-sys-api"
+ instanceId: "get it from ARM"
+ version: "v1"
+http:  
+ path: "/api/${api.version}/*"
+ host: "0.0.0.0"
+ port: "8081"
+ timeout: "60000"
+ trust: "realprodtruststore.jks"
+ key: "realprod.jks"
+ABB:
+ path: "/APIGW/soap/WFMSchedulingService"
+ #host: "10.18.28.242"
+ #host: "ssgdev04.rogers.com"
+ host: "mdcssgblack.rogers.com"
+ port: "443"
+error:
+ message400: "The request could not be understood or performed by the server due to malformed syntax and requires modifications before it can be performed."
+ message401: "Authorization credentials are required, or the user does not have access to the resource/method they are attempting."
+ message403: "You do not have permission to view the requested file or resource."
+ message404: "The resource requested could not be found."
+ message405: "The attempted method is not allowed on the collection/item being called upon."
+ message415: "The server refuses to accept the request because the request format is in an unsupported format."
+ message500: "The server ran into an unexpected error and was not able to perform the requested action."
+ message502: "The server is temporarily unable to respond to the request please try again shortly."
+ message503: "Internal System Error, Please contact IT Support Team."
+ messageClientId: "Account not Authorized"
+ description: "Client ID not available"
+raiseerror:
+ description: "Exception while invoking CICS program S01OS113"
+ 
+

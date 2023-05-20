@@ -1,0 +1,51 @@
+{
+  "S:Envelope": {
+    "xmlns:S": "http://schemas.xmlsoap.org/soap/envelope/",
+    "xmlns:env": "http://schemas.xmlsoap.org/soap/envelope/",
+    "S:Body": {
+      "ns0:WFMGetAppointments": {
+        "xmlns:ns2": "http://rci.rogers.com/schemas/Contact",
+        "xmlns:ns1": "http://rci.rogers.com/schemas/CallCentre",
+        "xmlns:ns3": "http://rci.rogers.com/schemas/Context",
+        "xmlns:ns0": "http://www.openuri.org/",
+        "xmlns:ns9": "http://rci.rogers.com/schemas/WFMReserveAppointment",
+        "xmlns:ns5": "http://rci.rogers.com/schemas/WFMCommon",
+        "xmlns:ns6": "http://rci.rogers.com/schemas/WFMConfirmAppointment",
+        "xmlns:ns7": "http://rci.rogers.com/schemas/WFMGetAppointments",
+        "xmlns:ns10": "http://rci.rogers.com/schemas/Scope",
+        "xmlns:ns8": "http://rci.rogers.com/schemas/WFMReleaseAppointment",
+        "ns7:WFMGetAppointmentsRequest": {
+          "ns10:scope": "Cable",
+          "TransactionId": "Thu Nov 15 16:06:05 EST 2018_1542315965976",
+          "ns7:Context": {
+            "ns3:Channel": "WS",
+            "ns3:ClientSystem": "TPIAPORTAL",
+            "ns3:InvocationMethod": "WFMGetAppointments",
+            "ns3:InvocationState": "U"
+          },
+          "ns7:WFMGetAppointmentInfo": {
+            "ns7:CallID": "C231408875800",
+            "ns7:OrderType": "RECN",
+            "ns7:NumberOfRequiredEngineers": "1",
+            "ns7:CBU": "SWO",
+            "ns7:Region": "SWO-SERV-INST",
+            "ns7:District": "CAMBRIDGE",
+            "ns7:MapArea": "630",
+            "ns7:SourcePriority": "06",
+            "ns7:WorkType": "TOPP",
+            "ns7:Duration": "2340",
+            "ns7:City": "CAMBRIDGE",
+            "ns7:State": "Ontario",
+            "ns7:PostalCode": "N1R5G5",
+            "ns7:SourceLatitude": "43.350552",
+            "ns7:SourceLongitude": "-80.294198",
+            "ns7:StartDate": "2018-11-22",
+            "ns7:RequiredSkills": {
+              "ns7:TaskRequiredSkill": { "ns7:Key": "TPIA" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

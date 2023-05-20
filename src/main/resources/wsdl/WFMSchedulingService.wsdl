@@ -1,0 +1,461 @@
+<WL5G3N0:definitions xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://www.openuri.org/" xmlns:WL5G3N2="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://www.openuri.org/">
+<WL5G3N0:types>
+<s:schema xmlns:conv="http://www.openuri.org/2002/04/soap/conversation/" xmlns:cw="http://www.openuri.org/2002/04/wsdl/conversation/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:jms="http://www.openuri.org/2002/04/wsdl/jms/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://www.openuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wfm="http://rci.rogers.com/schemas/WFMGetAppointments" xmlns:wfm2="http://rci.rogers.com/schemas/WFMReserveAppointment" xmlns:wfm3="http://rci.rogers.com/schemas/WFMConfirmAppointment" xmlns:wfm4="http://rci.rogers.com/schemas/WFMReleaseAppointment" elementFormDefault="qualified" targetNamespace="http://www.openuri.org/">
+<s:import namespace="http://rci.rogers.com/schemas/WFMGetAppointments"/>
+<s:import namespace="http://rci.rogers.com/schemas/WFMReserveAppointment"/>
+<s:import namespace="http://rci.rogers.com/schemas/WFMConfirmAppointment"/>
+<s:import namespace="http://rci.rogers.com/schemas/WFMReleaseAppointment"/>
+<s:element name="WFMGetAppointments">
+<s:complexType>
+<s:sequence>
+<s:element ref="wfm:WFMGetAppointmentsRequest"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="WFMGetAppointmentsResponse">
+<s:complexType>
+<s:sequence>
+<s:element ref="wfm:WFMGetAppointmentsResponse"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="WFMReserveAppointment">
+<s:complexType>
+<s:sequence>
+<s:element ref="wfm2:WFMReserveAppointmentRequest"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="WFMReserveAppointmentResponse">
+<s:complexType>
+<s:sequence>
+<s:element ref="wfm2:WFMReserveAppointmentResponse"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="WFMConfirmAppointment">
+<s:complexType>
+<s:sequence>
+<s:element ref="wfm3:WFMConfirmAppointmentRequest"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="WFMConfirmAppointmentResponse">
+<s:complexType>
+<s:sequence>
+<s:element ref="wfm3:WFMConfirmAppointmentResponse"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="WFMReleaseAppointment">
+<s:complexType>
+<s:sequence>
+<s:element ref="wfm4:WFMReleaseAppointmentRequest"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="WFMReleaseAppointmentResponse">
+<s:complexType>
+<s:sequence>
+<s:element ref="wfm4:WFMReleaseAppointmentResponse"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+</s:schema>
+<xs:schema xmlns:cct="http://rci.rogers.com/schemas/CallCentre" xmlns:con="http://rci.rogers.com/schemas/Contact" xmlns:conv="http://www.openuri.org/2002/04/soap/conversation/" xmlns:ctx="http://rci.rogers.com/schemas/Context" xmlns:cw="http://www.openuri.org/2002/04/wsdl/conversation/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:jms="http://www.openuri.org/2002/04/wsdl/jms/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://www.openuri.org/" xmlns:scp="http://rci.rogers.com/schemas/Scope" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://rci.rogers.com/schemas/WFMGetAppointments" xmlns:wfm="http://rci.rogers.com/schemas/WFMCommon" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://rci.rogers.com/schemas/WFMGetAppointments">
+<xs:import namespace="http://rci.rogers.com/schemas/WFMCommon"/>
+<xs:import namespace="http://rci.rogers.com/schemas/Context"/>
+<xs:import namespace="http://rci.rogers.com/schemas/CallCentre"/>
+<xs:import namespace="http://rci.rogers.com/schemas/Scope"/>
+<xs:complexType name="WFMGetAppointmentInfo">
+<xs:sequence>
+<xs:element name="CallID" type="xs:string"/>
+<xs:element name="OrderType" type="xs:string">
+<xs:annotation>
+<xs:documentation>Type of order, not required by click</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="NumberOfRequiredEngineers" type="xs:string"/>
+<xs:element name="CBU" type="xs:string"/>
+<xs:element name="Region" type="xs:string"/>
+<xs:element name="District" type="xs:string"/>
+<xs:element name="MapArea" type="xs:string"/>
+<xs:element name="SourcePriority" type="xs:string"/>
+<xs:element name="WorkType" type="xs:string"/>
+<xs:element name="Duration" type="xs:string"/>
+<xs:element name="City" type="xs:string"/>
+<xs:element name="State" type="xs:string"/>
+<xs:element name="PostalCode" type="xs:string"/>
+<xs:element name="SourceLatitude" type="xs:string"/>
+<xs:element name="SourceLongitude" type="xs:string"/>
+ <!--  used to make the profiles query  -->
+<xs:element name="StartDate" type="xs:date">
+<xs:annotation>
+<xs:documentation>Start date - sent to click (changes when scrolled)</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element maxOccurs="1" minOccurs="0" name="ReportingInfo" type="wfm:ReportingInfo"/>
+<xs:element name="RequiredSkills">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" name="TaskRequiredSkill">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Key" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="OptionalAppointments">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" name="TimeInterval" type="wfm:TimeInterval"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="WFMGetAppointmentsRequest">
+<xs:annotation>
+<xs:documentation>
+All information required to retrieve appointment information from Click
+</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="Context" type="ctx:Context"/>
+<xs:element minOccurs="0" name="CallCentreContact" type="cct:CallCentreContact"/>
+<xs:element name="WFMGetAppointmentInfo" type="tns:WFMGetAppointmentInfo"/>
+</xs:sequence>
+<xs:attribute ref="scp:scope" use="required"/>
+<xs:attribute name="TransactionId" type="xs:string" use="required"/>
+</xs:complexType>
+<xs:complexType name="WFMGetAppointmentsResponse">
+<xs:sequence>
+<xs:element name="ReturnCode" type="xs:string"/>
+<xs:element name="ReportingID" type="xs:string"/>
+<xs:element minOccurs="0" name="CallID" type="xs:string"/>
+<xs:element minOccurs="0" name="ProfileCode" type="xs:string"/>
+<xs:element minOccurs="0" name="NumberOfSearchDays" type="xs:int"/>
+<xs:element minOccurs="0" name="NumberOfProfileSlots" type="xs:int"/>
+<xs:element minOccurs="0" name="OptionalAppointments">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" name="TimeInterval" type="wfm:TimeInterval"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="WFMGetAppointmentsResponse" type="tns:WFMGetAppointmentsResponse"/>
+<xs:element name="WFMGetAppointmentsRequest" type="tns:WFMGetAppointmentsRequest"/>
+</xs:schema>
+<xs:schema xmlns:cct="http://rci.rogers.com/schemas/CallCentre" xmlns:con="http://rci.rogers.com/schemas/Contact" xmlns:conv="http://www.openuri.org/2002/04/soap/conversation/" xmlns:ctx="http://rci.rogers.com/schemas/Context" xmlns:cw="http://www.openuri.org/2002/04/wsdl/conversation/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:jms="http://www.openuri.org/2002/04/wsdl/jms/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://www.openuri.org/" xmlns:scp="http://rci.rogers.com/schemas/Scope" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://rci.rogers.com/schemas/WFMReserveAppointment" xmlns:wfm="http://rci.rogers.com/schemas/WFMCommon" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://rci.rogers.com/schemas/WFMReserveAppointment">
+<xs:import namespace="http://rci.rogers.com/schemas/Context"/>
+<xs:import namespace="http://rci.rogers.com/schemas/CallCentre"/>
+<xs:import namespace="http://rci.rogers.com/schemas/Scope"/>
+<xs:import namespace="http://rci.rogers.com/schemas/WFMCommon"/>
+<xs:complexType name="WFMReserveAppointmentRequest">
+<xs:sequence>
+<xs:element name="Context" type="ctx:Context"/>
+<xs:element minOccurs="0" name="CallCentreContact" type="cct:CallCentreContact"/>
+<xs:element name="WFMReserveAppointmentInfo" type="wfm:WFMReserveAppointmentInfo"/>
+<xs:element name="Recheck" type="xs:boolean"/>
+<xs:element name="Reschedule" type="xs:boolean"/>
+<xs:element name="CancelOnTimeout" type="xs:boolean"/>
+<xs:element name="TimeInterval" type="wfm:TimeInterval"/>
+</xs:sequence>
+<xs:attribute ref="scp:scope" use="required"/>
+<xs:attribute name="TransactionId" type="xs:string" use="required"/>
+</xs:complexType>
+<xs:complexType name="WFMReserveAppointmentResponse">
+<xs:sequence>
+<xs:element name="ReturnCode" type="xs:string"/>
+<xs:element name="ReportingID" type="xs:string"/>
+<xs:element minOccurs="0" name="CallID" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="WFMReserveAppointmentResponse" type="tns:WFMReserveAppointmentResponse"/>
+<xs:element name="WFMReserveAppointmentRequest" type="tns:WFMReserveAppointmentRequest"/>
+</xs:schema>
+<xs:schema xmlns:cct="http://rci.rogers.com/schemas/CallCentre" xmlns:con="http://rci.rogers.com/schemas/Contact" xmlns:conv="http://www.openuri.org/2002/04/soap/conversation/" xmlns:ctx="http://rci.rogers.com/schemas/Context" xmlns:cw="http://www.openuri.org/2002/04/wsdl/conversation/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:jms="http://www.openuri.org/2002/04/wsdl/jms/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://www.openuri.org/" xmlns:scp="http://rci.rogers.com/schemas/Scope" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://rci.rogers.com/schemas/WFMConfirmAppointment" xmlns:wfm="http://rci.rogers.com/schemas/WFMCommon" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://rci.rogers.com/schemas/WFMConfirmAppointment">
+<xs:import namespace="http://rci.rogers.com/schemas/Context"/>
+<xs:import namespace="http://rci.rogers.com/schemas/CallCentre"/>
+<xs:import namespace="http://rci.rogers.com/schemas/Scope"/>
+<xs:import namespace="http://rci.rogers.com/schemas/WFMCommon"/>
+<xs:complexType name="WFMConfirmAppointmentRequest">
+<xs:sequence>
+<xs:element name="Context" type="ctx:Context"/>
+<xs:element minOccurs="0" name="CallCentreContact" type="cct:CallCentreContact"/>
+<xs:element name="WFMReserveAppointmentInfo" type="wfm:WFMReserveAppointmentInfo"/>
+<xs:element minOccurs="0" name="OldCallID" type="xs:string"/>
+<xs:element name="TimeInterval" type="wfm:TimeInterval"/>
+</xs:sequence>
+<xs:attribute ref="scp:scope" use="required"/>
+<xs:attribute name="TransactionId" type="xs:string" use="required"/>
+</xs:complexType>
+<xs:complexType name="WFMConfirmAppointmentResponse">
+<xs:sequence>
+<xs:element minOccurs="1" name="ReturnCode" type="xs:string"/>
+<xs:element name="ReportingID" type="xs:string"/>
+<xs:element minOccurs="0" name="CallID" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="WFMConfirmAppointmentResponse" type="tns:WFMConfirmAppointmentResponse"/>
+<xs:element name="WFMConfirmAppointmentRequest" type="tns:WFMConfirmAppointmentRequest"/>
+</xs:schema>
+<xs:schema xmlns:cct="http://rci.rogers.com/schemas/CallCentre" xmlns:con="http://rci.rogers.com/schemas/Contact" xmlns:conv="http://www.openuri.org/2002/04/soap/conversation/" xmlns:ctx="http://rci.rogers.com/schemas/Context" xmlns:cw="http://www.openuri.org/2002/04/wsdl/conversation/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:jms="http://www.openuri.org/2002/04/wsdl/jms/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://www.openuri.org/" xmlns:scp="http://rci.rogers.com/schemas/Scope" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://rci.rogers.com/schemas/WFMReleaseAppointment" xmlns:wfm="http://rci.rogers.com/schemas/WFMCommon" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://rci.rogers.com/schemas/WFMReleaseAppointment">
+<xs:import namespace="http://rci.rogers.com/schemas/Context"/>
+<xs:import namespace="http://rci.rogers.com/schemas/CallCentre"/>
+<xs:import namespace="http://rci.rogers.com/schemas/Scope"/>
+<xs:import namespace="http://rci.rogers.com/schemas/WFMCommon"/>
+<xs:complexType name="WFMReleaseAppointmentRequest">
+<xs:annotation>
+<xs:documentation>
+All information required to retrieve appointment information from Click
+</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="Context" type="ctx:Context"/>
+<xs:element minOccurs="0" name="CallCentreContact" type="cct:CallCentreContact"/>
+<xs:element name="CallID" type="xs:string"/>
+<xs:element name="DestructiveRelease" type="xs:boolean"/>
+<xs:element minOccurs="0" name="ReportingInfo" type="wfm:ReportingInfo"/>
+</xs:sequence>
+<xs:attribute ref="scp:scope" use="required"/>
+<xs:attribute name="TransactionId" type="xs:string" use="required"/>
+</xs:complexType>
+<xs:complexType name="WFMReleaseAppointmentResponse">
+<xs:sequence>
+<xs:element name="ReturnCode" type="xs:string"/>
+<xs:element minOccurs="0" name="CallID" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="WFMReleaseAppointmentResponse" type="tns:WFMReleaseAppointmentResponse"/>
+<xs:element name="WFMReleaseAppointmentRequest" type="tns:WFMReleaseAppointmentRequest"/>
+</xs:schema>
+<xs:schema xmlns:conv="http://www.openuri.org/2002/04/soap/conversation/" xmlns:cw="http://www.openuri.org/2002/04/wsdl/conversation/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:jms="http://www.openuri.org/2002/04/wsdl/jms/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://www.openuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://rci.rogers.com/schemas/WFMCommon" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://rci.rogers.com/schemas/WFMCommon">
+<xs:complexType name="WFMReserveAppointmentInfo">
+<xs:sequence>
+<xs:element name="CallID" type="xs:string"/>
+<xs:element minOccurs="1" name="OrderType" type="xs:string"/>
+<xs:element minOccurs="0" name="NumberOfRequiredEngineers" type="xs:string"/>
+<xs:element minOccurs="1" name="CBU" type="xs:string"/>
+<xs:element minOccurs="1" name="Region" type="xs:string"/>
+<xs:element minOccurs="1" name="District" type="xs:string"/>
+<xs:element name="MapArea" type="xs:string"/>
+<xs:element minOccurs="1" name="SourcePriority" type="xs:string"/>
+<xs:element minOccurs="1" name="Worktype" type="xs:string"/>
+<xs:element minOccurs="1" name="Duration" type="xs:string"/>
+<xs:element minOccurs="1" name="Status" type="xs:string"/>
+<xs:element minOccurs="1" name="City" type="xs:string"/>
+<xs:element minOccurs="1" name="State" type="xs:string"/>
+<xs:element minOccurs="1" name="PostalCode" type="xs:string"/>
+<xs:element minOccurs="1" name="SourceLatitude" type="xs:string"/>
+<xs:element minOccurs="1" name="SourceLongitude" type="xs:string"/>
+<xs:element maxOccurs="1" minOccurs="0" name="ReportingInfo" type="tns:ReportingInfo"/>
+<xs:element minOccurs="1" name="RequiredSkills">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" name="TaskRequiredSkill1">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Key" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="TimeInterval">
+<xs:sequence>
+<xs:element minOccurs="1" name="SlotCode" type="xs:string"/>
+<xs:element minOccurs="1" name="SlotDescription" type="xs:string"/>
+<xs:element minOccurs="1" name="Start" type="xs:dateTime"/>
+<xs:element minOccurs="1" name="Finish" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="StartTime" type="xs:string"/>
+<xs:element minOccurs="0" name="FinishTime" type="xs:string"/>
+<xs:element minOccurs="1" name="IsAppointmentAvailable" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ReportingInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="ReportingID" type="xs:string"/>
+<xs:element minOccurs="0" name="ReportingCentre" type="xs:string"/>
+<xs:element minOccurs="0" name="AccountNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="SSAddressKey" type="xs:string"/>
+<xs:element minOccurs="0" name="CustomerValue" type="xs:string"/>
+<xs:element minOccurs="0" name="CustomerPreferenceDate" type="xs:date"/>
+<xs:element minOccurs="0" name="CustomerPreferenceEarliestStartTime" type="xs:time"/>
+<xs:element minOccurs="0" name="CustomerPreferenceLatestStartTime" type="xs:time"/>
+<xs:element minOccurs="0" name="CustomerPreferenceRequestType" type="xs:string"/>
+<xs:element minOccurs="0" name="OverrideIndicator" type="xs:boolean"/>
+<xs:element minOccurs="0" name="CriteriaOfferedIndicator" type="xs:boolean"/>
+<xs:element minOccurs="0" name="CriteriaSelectedIndicator" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+<xs:schema xmlns:conv="http://www.openuri.org/2002/04/soap/conversation/" xmlns:cw="http://www.openuri.org/2002/04/wsdl/conversation/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:jms="http://www.openuri.org/2002/04/wsdl/jms/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://www.openuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://rci.rogers.com/schemas/Context" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://rci.rogers.com/schemas/Context">
+<xs:complexType name="Context">
+<xs:annotation>
+<xs:documentation>
+A set of attributes that denote the context of incoming requests for auditing/reporting and qualification purposes. Includes the inbound channel, the client system making the request, the method of invocation (i.e. automatically invoked by the system, such as through a CTI activation - or manual invocation through a user gesture), and the optional state of the system performing the invocation (i.e. what part of the application was the user in when they requested an offer?)
+</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="Channel" type="xs:string"/>
+<xs:element name="ClientSystem" type="xs:string"/>
+<xs:element minOccurs="0" name="InvocationMethod" type="xs:string"/>
+<xs:element minOccurs="0" name="InvocationState">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:enumeration value="A"/>
+<xs:enumeration value="M"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+<xs:schema xmlns="http://rci.rogers.com/schemas/CallCentre" xmlns:conv="http://www.openuri.org/2002/04/soap/conversation/" xmlns:ctc="http://rci.rogers.com/schemas/Contact" xmlns:cw="http://www.openuri.org/2002/04/wsdl/conversation/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:jms="http://www.openuri.org/2002/04/wsdl/jms/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://www.openuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://rci.rogers.com/schemas/CallCentre">
+<xs:import namespace="http://rci.rogers.com/schemas/Contact"/>
+<xs:complexType name="CallCentreContact">
+<xs:annotation>
+<xs:documentation>
+Incoming contact to a call centre. Notes the IVR call type qualifier, agent ID, type of call centre (i.e. technical, retention, etc.), location of centre, and optionally the skills of the handling agent.
+</xs:documentation>
+</xs:annotation>
+<xs:complexContent>
+<xs:extension base="ctc:Contact">
+<xs:sequence>
+<xs:element name="AgentID" type="xs:string"/>
+<xs:element name="AgentSkillLevel" type="xs:string"/>
+<xs:element name="AgentProfile" type="xs:string"/>
+<xs:element name="IVRQualifier" type="xs:string"/>
+<xs:element name="Type" type="xs:string"/>
+<xs:element name="Location" type="xs:string"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:schema>
+<xs:schema xmlns:conv="http://www.openuri.org/2002/04/soap/conversation/" xmlns:cw="http://www.openuri.org/2002/04/wsdl/conversation/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:jms="http://www.openuri.org/2002/04/wsdl/jms/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://www.openuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://rci.rogers.com/schemas/Scope" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://rci.rogers.com/schemas/Scope">
+<xs:attribute name="scope">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:enumeration value="Wireless"/>
+<xs:enumeration value="Cable"/>
+<xs:enumeration value="RCI"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+</xs:schema>
+<xs:schema xmlns:conv="http://www.openuri.org/2002/04/soap/conversation/" xmlns:ctc="http://rci.rogers.com/schemas/Contact" xmlns:cw="http://www.openuri.org/2002/04/wsdl/conversation/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:jms="http://www.openuri.org/2002/04/wsdl/jms/" xmlns:lang="http://rci.rogers.com/schemas/Language" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://www.openuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://rci.rogers.com/schemas/Contact">
+<xs:import namespace="http://rci.rogers.com/schemas/Language"/>
+<xs:complexType name="Contact">
+<xs:sequence>
+<xs:element name="Language" type="lang:Language"/>
+</xs:sequence>
+</xs:complexType>
+<xs:attribute name="Channel" type="xs:string"/>
+</xs:schema>
+<xs:schema xmlns:conv="http://www.openuri.org/2002/04/soap/conversation/" xmlns:cw="http://www.openuri.org/2002/04/wsdl/conversation/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:jms="http://www.openuri.org/2002/04/wsdl/jms/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://www.openuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://rci.rogers.com/schemas/Language" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://rci.rogers.com/schemas/Language">
+<xs:attributeGroup name="LanguageAttributes">
+<xs:attribute name="lang" type="xs:language" use="required"/>
+</xs:attributeGroup>
+<xs:complexType name="Language">
+<xs:attributeGroup ref="tns:LanguageAttributes"/>
+</xs:complexType>
+</xs:schema>
+</WL5G3N0:types>
+<WL5G3N0:message name="WFMGetAppointmentsSoapIn">
+<WL5G3N0:part element="WL5G3N1:WFMGetAppointments" name="parameters"/>
+</WL5G3N0:message>
+<WL5G3N0:message name="WFMGetAppointmentsSoapOut">
+<WL5G3N0:part element="WL5G3N1:WFMGetAppointmentsResponse" name="parameters"/>
+</WL5G3N0:message>
+<WL5G3N0:message name="WFMReserveAppointmentSoapIn">
+<WL5G3N0:part element="WL5G3N1:WFMReserveAppointment" name="parameters"/>
+</WL5G3N0:message>
+<WL5G3N0:message name="WFMReserveAppointmentSoapOut">
+<WL5G3N0:part element="WL5G3N1:WFMReserveAppointmentResponse" name="parameters"/>
+</WL5G3N0:message>
+<WL5G3N0:message name="WFMConfirmAppointmentSoapIn">
+<WL5G3N0:part element="WL5G3N1:WFMConfirmAppointment" name="parameters"/>
+</WL5G3N0:message>
+<WL5G3N0:message name="WFMConfirmAppointmentSoapOut">
+<WL5G3N0:part element="WL5G3N1:WFMConfirmAppointmentResponse" name="parameters"/>
+</WL5G3N0:message>
+<WL5G3N0:message name="WFMReleaseAppointmentSoapIn">
+<WL5G3N0:part element="WL5G3N1:WFMReleaseAppointment" name="parameters"/>
+</WL5G3N0:message>
+<WL5G3N0:message name="WFMReleaseAppointmentSoapOut">
+<WL5G3N0:part element="WL5G3N1:WFMReleaseAppointmentResponse" name="parameters"/>
+</WL5G3N0:message>
+<WL5G3N0:portType name="WFMSchedulingServiceSoap">
+<WL5G3N0:operation name="WFMGetAppointments">
+<WL5G3N0:input message="WL5G3N1:WFMGetAppointmentsSoapIn"/>
+<WL5G3N0:output message="WL5G3N1:WFMGetAppointmentsSoapOut"/>
+</WL5G3N0:operation>
+<WL5G3N0:operation name="WFMReserveAppointment">
+<WL5G3N0:input message="WL5G3N1:WFMReserveAppointmentSoapIn"/>
+<WL5G3N0:output message="WL5G3N1:WFMReserveAppointmentSoapOut"/>
+</WL5G3N0:operation>
+<WL5G3N0:operation name="WFMConfirmAppointment">
+<WL5G3N0:input message="WL5G3N1:WFMConfirmAppointmentSoapIn"/>
+<WL5G3N0:output message="WL5G3N1:WFMConfirmAppointmentSoapOut"/>
+</WL5G3N0:operation>
+<WL5G3N0:operation name="WFMReleaseAppointment">
+<WL5G3N0:input message="WL5G3N1:WFMReleaseAppointmentSoapIn"/>
+<WL5G3N0:output message="WL5G3N1:WFMReleaseAppointmentSoapOut"/>
+</WL5G3N0:operation>
+</WL5G3N0:portType>
+<WL5G3N0:binding name="WFMSchedulingServiceSoap" type="WL5G3N1:WFMSchedulingServiceSoap">
+<WL5G3N2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<WL5G3N0:operation name="WFMGetAppointments">
+<WL5G3N2:operation soapAction="http://www.openuri.org/WFMGetAppointments" style="document"/>
+<WL5G3N0:input>
+<WL5G3N2:body use="literal"/>
+</WL5G3N0:input>
+<WL5G3N0:output>
+<WL5G3N2:body use="literal"/>
+</WL5G3N0:output>
+</WL5G3N0:operation>
+<WL5G3N0:operation name="WFMReserveAppointment">
+<WL5G3N2:operation soapAction="http://www.openuri.org/WFMReserveAppointment" style="document"/>
+<WL5G3N0:input>
+<WL5G3N2:body use="literal"/>
+</WL5G3N0:input>
+<WL5G3N0:output>
+<WL5G3N2:body use="literal"/>
+</WL5G3N0:output>
+</WL5G3N0:operation>
+<WL5G3N0:operation name="WFMConfirmAppointment">
+<WL5G3N2:operation soapAction="http://www.openuri.org/WFMConfirmAppointment" style="document"/>
+<WL5G3N0:input>
+<WL5G3N2:body use="literal"/>
+</WL5G3N0:input>
+<WL5G3N0:output>
+<WL5G3N2:body use="literal"/>
+</WL5G3N0:output>
+</WL5G3N0:operation>
+<WL5G3N0:operation name="WFMReleaseAppointment">
+<WL5G3N2:operation soapAction="http://www.openuri.org/WFMReleaseAppointment" style="document"/>
+<WL5G3N0:input>
+<WL5G3N2:body use="literal"/>
+</WL5G3N0:input>
+<WL5G3N0:output>
+<WL5G3N2:body use="literal"/>
+</WL5G3N0:output>
+</WL5G3N0:operation>
+</WL5G3N0:binding>
+<WL5G3N0:service name="WFMSchedulingService">
+<WL5G3N0:documentation>OSB Service</WL5G3N0:documentation>
+<WL5G3N0:port binding="WL5G3N1:WFMSchedulingServiceSoap" name="WFMSchedulingServiceSoap">
+<WL5G3N2:address location="https://ssgsft04p.rogers.com:8443/APIGW/soap/WFMSchedulingService"/>
+</WL5G3N0:port>
+</WL5G3N0:service>
+</WL5G3N0:definitions>
