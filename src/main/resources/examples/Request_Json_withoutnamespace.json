@@ -1,0 +1,39 @@
+{
+  "Envelope": {
+    "Body": {
+      "WFMGetAppointments": {
+        "WFMGetAppointmentsRequest": {
+          "scope": "Cable",
+          "TransactionId": "Thu Nov 15 16:06:05 EST 2018_1542315965976",
+          "Context": {
+            "Channel": "WS",
+            "ClientSystem": "TPIAPORTAL",
+            "InvocationMethod": "WFMGetAppointments",
+            "InvocationState": "U"
+          },
+          "WFMGetAppointmentInfo": {
+            "CallID": "C231408875800",
+            "OrderType": "RECN",
+            "NumberOfRequiredEngineers": "1",
+            "CBU": "SWO",
+            "Region": "SWO-SERV-INST",
+            "District": "CAMBRIDGE",
+            "MapArea": "630",
+            "SourcePriority": "06",
+            "WorkType": "TOPP",
+            "Duration": "2340",
+            "City": "CAMBRIDGE",
+            "State": "Ontario",
+            "PostalCode": "N1R5G5",
+            "SourceLatitude": "43.350552",
+            "SourceLongitude": "-80.294198",
+            "StartDate": "2018-11-22",
+            "RequiredSkills": {
+              "TaskRequiredSkill": { "Key": "TPIA" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

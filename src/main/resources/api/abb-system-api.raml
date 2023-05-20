@@ -1,0 +1,37 @@
+#%RAML 1.0
+title: ABB-GetAppointmentCall-System-API
+description: This API is used to schedule appointment of the available technician.
+version: v1
+mediaType: application/json
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/a80c314d-835b-49a3-a0a3-4c6b10f91b01/api/v1/validate # baseUri: http://abb-system-api.rogers.com/api/v1/scheduleAppointment
+protocols: [HTTP]
+
+
+
+
+/scheduleAppointment:
+  displayName: Schedule Appointment of the techinician
+  description: Schedule Appointment of the techinician
+  
+
+  post:
+    headers:
+      client_ref:
+        type: string
+        required: true
+        example: C12345
+      transactionId:
+        type: string
+        required: true
+        example: 0-7745ace0-65e2-11e9-aecd-001dd8b74be8
+    body:
+        application/json:
+            example: !include Examples/ABB-Request.json
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/ABB-Response.json
+      
+                        
+      

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:wsc="http://www.mulesoft.org/schema/mule/wsc" xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
+	xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
+http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/current/mule-wsc.xsd">
+	<configuration-properties doc:name="Configuration properties" doc:id="0656042c-f751-474a-90fb-aaec39c07141" file="config-${env}-properties.yaml" />
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="8288702f-f4fe-40bb-ac7f-4ab7365378d0" >
+		<http:listener-connection port="${http.port}" host="${http.host}"/>
+	</http:listener-config>
+	<apikit:config outboundHeadersMapName="outboundHeadersMapName" httpStatusVarName="httpStatus" doc:name="Router" doc:id="e781ef6a-4a3f-40a9-bc54-9350eb296e34" name="Router_abb_system_api" api="abb-system-api.raml">
+	<apikit:flow-mappings >
+			<apikit:flow-mapping resource="\scheduleAppointment" action="post" content-type="application/json" flow-ref="post:\scheduleAppointment:Router_abb_system_api" />
+
+
+		</apikit:flow-mappings>
+	</apikit:config>
+	<tls:context name="TLS_Context" doc:name="TLS Context" doc:id="440ac186-83a5-492e-8249-8264bae4bf28" >
+		<tls:trust-store path="${http.trust}" password="changeit" type="jks" insecure="true" />
+		<tls:key-store type="jks" path="${http.key}" keyPassword="changeit" password="changeit"/>
+	</tls:context>
+	<!-- <wsc:config name="Web_Service_Consumer_Config" doc:name="Web Service Consumer Config" doc:id="4cee9d0b-f8e4-47fc-ba53-c8c7d04424c4" >
+		<wsc:connection wsdlLocation="wsdl/WFMSchedulingService.wsdl" service="WFMSchedulingService" port="WFMSchedulingServiceSoap" address="https://ssgsft04p.rogers.com:8443/APIGW/soap/WFMSchedulingService">
+			<wsc:web-service-security >
+				<wsc:sign-security-strategy >
+					<wsc:key-store-configuration alias="realqa" keyPassword="changeit" password="changeit" keyStorePath="C:\Users\nandita.kumari\AnypointStudio\studio-workspace\poc\src\main\resources\realqa.jks" type="JKS"/>
+				</wsc:sign-security-strategy>
+			</wsc:web-service-security>
+		</wsc:connection>
+	</wsc:config> -->
+	<http:request-config name="HTTP_Request_configuration_ABB" doc:name="HTTP Request configuration" doc:id="648217f8-a684-4a16-b578-3f003d0dfc86" responseTimeout="${http.timeout}">
+		<http:request-connection host="${ABB.host}" port="${ABB.port}" tlsContext="TLS_Context" protocol="HTTPS"/>
+	</http:request-config>
+	<global-property doc:name="Global Property" doc:id="83e4ad65-1c07-470d-9f72-edaff74c7004" name="env" value="pet" />
+	
+
+</mule>
