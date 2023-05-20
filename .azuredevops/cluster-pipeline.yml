@@ -1,0 +1,87 @@
+parameters:
+  - name: name
+    type: string 
+  - name: displayName
+    type: string
+  - name: cluster
+    type: string
+  - name: script
+    type: string
+    default: ''
+  - name: preSteps
+    type: stepList
+    default: [ ]    
+  - name: postSteps
+    type: stepList
+    default: [ ]
+  - name: inputs
+    type: object
+    default: [ ]
+  - name: depends
+    type: object
+    default: [ ]
+  - name: detectCloud
+    type: boolean
+    default: 'true' 
+  - name: cloudJobName
+    type: string
+    default: detect_cloud 
+  - name: library
+    type: boolean
+    default: 'true'
+  - name: cloud
+    type: string
+    default: ''
+
+jobs:
+  - ${{ if eq(parameters.detectCloud, 'true') }}:
+    - template: jobs/detect-cloud.yml
+      parameters:
+        cluster: ${{ parameters.cluster }}
+        
+  - job: ${{ parameters.name }}
+    displayName: ${{ parameters.displayName }}
+    dependsOn:
+      - ${{ parameters.depends }}
+      - ${{ if eq(parameters.detectCloud, 'true') }}:
+          - detect_cloud
+    variables:               
+      ${{ if eq(parameters.cloud, '') }}:
+        cloud: $[ dependencies.${{ parameters.cloudJobName }}.outputs['cloud.CLOUD'] ]
+      ${{ else }}:
+        cloud: ${{ parameters.cloud }}
+      cluster_underscore: ${{ replace(parameters.cluster, '-', '_') }}
+      SP_USR_KEY: ${{ format('{0}_SP_USR', parameters.cluster) }}
+      SP_PSW_KEY: ${{ format('{0}_SP_PSW', parameters.cluster) }}
+      SP_USR: $[ variables[variables.SP_USR_KEY] ]
+      SP_PSW: $[ variables[variables.SP_PSW_KEY] ]
+      joinInput: ${{ join(';', parameters.inputs) }}
+      secret: $[ dependencies.get.outputs['output.SecretVal'] ]
+    pool:
+      name: k8s-deploytools
+      demands:
+        - CLOUD -equals $(cloud)
+    steps:
+      - ${{ each step in parameters.preSteps }}:
+          - ${{ step }}    
+      - script: |
+          { set -eu +x; } 2>/dev/null
+          export $(cluster_underscore)_SP_USR=$(SP_USR)
+          export $(cluster_underscore)_SP_PSW=$(SP_PSW)
+          cluster-setup.sh clusters.yml '${{ parameters.cluster }}'
+          . cluster-connect.sh ${{ parameters.cluster }}  
+          mkdir -p artifacts      
+          { set -eu +x; } 2>/dev/null  
+          ${{ parameters.script }}
+          { set -eux; } 2>/dev/null
+        name: output  
+        displayName: Output
+        env:
+          HELM_CREDENTIALS_PSW: $(ARTIFACTORY_CREDENTIALS_PSW)
+          HELM_CREDENTIALS_USR: $(ARTIFACTORY_CREDENTIALS_USR)
+          BUILD_ENV: lower($(cloud))
+      - ${{ each step in parameters.postSteps }}:
+          - ${{ step }}
+      - publish: artifacts
+        artifact: output
+        displayName: Publish Artifacts to Pipeline

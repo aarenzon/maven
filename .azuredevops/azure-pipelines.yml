@@ -1,22 +1,32 @@
-# Maven
-# Build your Java project and run tests with Apache Maven.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+name: $(Rev:r)
 
-trigger:
-- main
+trigger: none
+pr: none
 
-pool:
-  vmImage: k8s-deploytools #ubuntu-latest
+parameters:
+  - name: cluster
+    displayName: 
+    type: string
+    values:
+     - mazcacitprdacloudbeesaks01
 
-steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+variables:
+  - group: cex_jenkins_api
+  - group: aks_service_principals
+  # remove once fully on ADO and reference is removed from the cluster-connect.sh scripts
+  - name: STAGE_NAME
+    value: task
+
+extends:
+  template: ../cluster-pipeline.yml
+  parameters:
+    name: run_maven
+    displayName: Run Maven
+    cluster: ${{ parameters.cluster }}
+    script: |
+      export RENOVATE_CONFIG_FILE="./.azuredevops/renovate/config.js"
+      git config --global user.email 'bot@renovateapp.com'
+      git config --global user.name 'Renovate Bot'
+      yum install -y mvn
+      mvn -B -DskipTests clean package
+      
