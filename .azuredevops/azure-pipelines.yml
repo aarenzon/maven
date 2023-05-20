@@ -24,6 +24,6 @@ extends:
     displayName: Run Maven
     cluster: ${{ parameters.cluster }}
     script: |
-      yum install -y mvn
+      yum install -y maven
       mvn -B -DskipTests clean package
       
