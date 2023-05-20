@@ -17,8 +17,8 @@ jobs:
           distribution: 'adopt'
           architecture: x64
           cache: maven
-      - run: mvn --batch-mode --update-snapshots package
-      - run: ls -arlt /target && mkdir staging && cp target/*.jar staging
+      - run: mvn -B package --file pom.xml
+      - run: ls -arlt target && mkdir staging && cp target/*.jar staging
       - uses: actions/upload-artifact@v3
         with:
           name: my-artifact
