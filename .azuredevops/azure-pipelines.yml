@@ -18,15 +18,12 @@ variables:
     value: task
 
 extends:
-  template: ../cluster-pipeline.yml
+  template: cluster-pipeline.yml
   parameters:
     name: run_maven
     displayName: Run Maven
     cluster: ${{ parameters.cluster }}
     script: |
-      export RENOVATE_CONFIG_FILE="./.azuredevops/renovate/config.js"
-      git config --global user.email 'bot@renovateapp.com'
-      git config --global user.name 'Renovate Bot'
       yum install -y mvn
       mvn -B -DskipTests clean package
       
