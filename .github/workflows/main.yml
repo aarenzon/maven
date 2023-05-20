@@ -5,6 +5,9 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     steps:
       - uses: actions/checkout@v3
@@ -15,8 +18,10 @@ jobs:
           architecture: x64
           cache: maven
       - run: mvn --batch-mode --update-snapshots package
-      - run: mkdir staging && cp target/*.jar staging
+      - run: ls -arlt /target && mkdir staging && cp target/*.jar staging
       - uses: actions/upload-artifact@v3
         with:
-          name: Package
-          path: staging
+          name: my-artifact
+          path: staging/
+          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
+          retention-days: 5
