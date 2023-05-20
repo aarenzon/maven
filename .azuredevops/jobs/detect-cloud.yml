@@ -22,7 +22,7 @@ jobs:
           elif [ "${CLOUD}" == 'azure' ]; then
             CLOUD=Azure
           else
-            CLOUD=UNKNOWN
+            CLOUD=Azure
           fi
           
           echo "CLOUD='${CLOUD}'"
