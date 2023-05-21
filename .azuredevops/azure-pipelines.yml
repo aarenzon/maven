@@ -18,3 +18,8 @@ extends:
       - integration-tests
       - problem-detection
       - source-stats
+      - info
+      - unit-tests
+      - validation
+      - quality-gate
+      - gates
