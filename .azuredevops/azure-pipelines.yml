@@ -1,29 +1,20 @@
 name: $(Rev:r)
 
-trigger: none
-pr: none
-
-parameters:
-  - name: cluster
-    displayName: 
-    type: string
-    values:
-     - mazcacitprdacloudbeesaks01
-
-variables:
-  - group: cex_jenkins_api
-  - group: aks_service_principals
-  # remove once fully on ADO and reference is removed from the cluster-connect.sh scripts
-  - name: STAGE_NAME
-    value: task
+resources:
+  repositories:
+    - repository: shared
+      type: github
+      endpoint: svcdawsdev
+      name: RogersCommunications/enterprise-ado-pipelines
+      ref: refs/heads/feature/maven
 
 extends:
-  template: cluster-pipeline.yml
+  template: maven.yml@shared
   parameters:
-    name: run_maven
-    displayName: Run Maven
-    cluster: ${{ parameters.cluster }}
-    script: |
-      yum install maven -y
-      mvn -B -DskipTests clean package
-      
+    # repo: drpp-docker-virtual
+    # artifactory: artifactory-service
+    jdk: '11'
+    disabled_stage:
+      - integration-tests
+      - problem-detection
+      - source-stats
