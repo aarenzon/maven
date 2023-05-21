@@ -11,8 +11,8 @@ resources:
 extends:
   template: maven.yml@shared
   parameters:
-    repo: drpp-docker-virtual
-    artifactory: artifactory-service
+    repo: cdk-docker-virtual
+    # artifactory: artifactory-service
     jdk: '11'
     disabled_stage:
       - integration-tests
