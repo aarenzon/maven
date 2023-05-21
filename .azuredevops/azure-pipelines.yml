@@ -24,6 +24,7 @@ extends:
     displayName: Run Maven
     cluster: ${{ parameters.cluster }}
     script: |
+      rm -rf /root/.m2/
       curl -LO https://dlcdn.apache.org/maven/maven-3/3.9.2/binaries/apache-maven-3.9.2-bin.tar.gz && tar -xzf apache-maven-3.9.2-bin.tar.gz -C /opt
       /opt/apache-maven-3.9.2/bin/mvn -v
       /opt/apache-maven-3.9.2/bin/mvn -B -DskipTests clean package
