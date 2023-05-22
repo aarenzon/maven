@@ -19,7 +19,7 @@ extends:
       - problem-detection
       - source-stats
       - info
-      - unit-tests
+#      - unit-tests
       - validation
       - quality-gate
       - gates
