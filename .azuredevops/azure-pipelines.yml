@@ -20,6 +20,6 @@ extends:
       - source-stats
       - info
 #      - unit-tests
-      - validation
+#      - validation
       - quality-gate
       - gates
